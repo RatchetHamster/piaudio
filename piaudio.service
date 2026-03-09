@@ -3,6 +3,8 @@ Description=PiAudio Service
 After=multi-user.target
 
 [Service]
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/pi/.Xauthority
 Type=simple
 User=root
 WorkingDirectory=/home/pi/piaudio

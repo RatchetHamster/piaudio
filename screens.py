@@ -3,6 +3,8 @@ from PIL import Image, ImageTk
 import os
 from pathlib import Path
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 class ViewBase(tk.Frame):
     def __init__(self, parent, controller, **kwargs):
         super().__init__(parent, **kwargs)
@@ -57,7 +59,7 @@ class ViewBase(tk.Frame):
             rotation = rotation in degrees (clockwise)
             pos = "nw, ne, sw, se" """
 
-        img = Image.open(os.path.join("resources", f'{icon_name_str}.png')).convert("RGBA")
+        img = Image.open(os.path.join(BASE_DIR,"resources", f'{icon_name_str}.png')).convert("RGBA")
         img = img.rotate(rotation, expand=True)
         if icon_name_str != "icon-backdrop":
             alpha = img.getchannel("A")
@@ -262,5 +264,6 @@ if __name__ == "__main__":
     view.title_list = ["1", "odhf", "woeihr", "sjkehrf........................................"]
     view.bold_index = 1
     
+
 
     root.mainloop()

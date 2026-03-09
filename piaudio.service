@@ -1,0 +1,17 @@
+[Unit]
+Description=PiAudio Service
+After=multi-user.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/pi/piaudio
+ExecStart=/home/pi/venv/bin/python3 /home/pi/piaudio/main.py
+Restart=always
+RestartSec=2
+StandardOutput=journal
+StandardError=journal
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

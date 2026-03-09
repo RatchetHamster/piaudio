@@ -16,7 +16,6 @@ class CoreMixer:
         if not mixer.get_init():
             mixer.init()
         # Optional: ensure system volume at max (Linux)
-        os.system("amixer set Master 100%")
         mixer.music.set_volume(0.4)  # Start at 40% volume
 
     def load(self, path_str):
@@ -179,4 +178,5 @@ if __name__ == "__main__":
             print(folder.name)
     if controller.active_obj.tracks is not None:
         for track in controller.active_obj.tracks:
+
             print(track.name)

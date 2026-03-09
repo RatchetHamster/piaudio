@@ -1,19 +1,25 @@
 [Unit]
 Description=PiAudio Service
-After=multi-user.target
+After=graphical.target sound.target
+Wants=sound.target
 
 [Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/piaudio
+
 Environment=DISPLAY=:0
 Environment=XAUTHORITY=/home/pi/.Xauthority
-Type=simple
-User=root
-WorkingDirectory=/home/pi/piaudio
-ExecStart=/home/pi/venv/bin/python3 /home/pi/piaudio/main.py
-Restart=always
-RestartSec=2
-StandardOutput=journal
-StandardError=journal
 Environment=PYTHONUNBUFFERED=1
 
+ExecStartPre=/bin/sleep 5
+ExecStart=/home/pi/venv/bin/python3 /home/pi/piaudio/main.py
+
+Restart=always
+RestartSec=2
+
+StandardOutput=journal
+StandardError=journal
+
 [Install]
-WantedBy=multi-user.target
+WantedBy=graphical.target

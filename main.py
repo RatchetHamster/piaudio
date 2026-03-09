@@ -63,7 +63,7 @@ class App(tk.Tk):
         
 
         # --- Library ---
-        self.player = Controller(path_str=r'D:\Media\Audiobooks\AudiobookPi')
+        self.player = Controller(path_str=r'/home/pi/Music')
         self.set_to_current_folder_view()
         self.show_screen("ViewFolder")
 
@@ -279,4 +279,5 @@ if __name__ == "__main__":
     app.mainloop()
 
         
+
 

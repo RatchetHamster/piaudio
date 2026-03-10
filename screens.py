@@ -102,7 +102,7 @@ class ViewBase:
 
 class ViewFolder(ViewBase):
     def __init__(self, parent, controller):
-        super().__init__(parent, controller, bg=parent["bg"])
+        super().__init__(parent, controller)
 
         # --- Draw Icons ---
         self.draw_icons("icon-time-onoff", rotation=0, pos="nw", h_pad=50, w_pad=3)
@@ -201,9 +201,8 @@ class ViewFolder(ViewBase):
 
 class ViewTrack(ViewBase):
 
-    def __init__(self, display, controller):
-
-        super().__init__(display, controller)
+    def __init__(self, parent, controller):
+        super().__init__(self, parent, controller)
 
         self.draw_icons("icon-time-onoff", 0, "nw", 50, 3)
         self.draw_icons("icon-rightarrow", 270, "sw", 50, 3)

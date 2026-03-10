@@ -180,7 +180,7 @@ class ViewFolder(ViewBase):
                 self._title_text,
                 fill="black",
                 anchor="ma",
-                font=self.font_sm
+                font=self.font
             )
 
         self.parent.hardware.screen.display.display(frame)

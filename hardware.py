@@ -127,7 +127,7 @@ class HardwareController():
     def but_press(self, btn):
         self.timer.nudge()
     
-    def poll_thread(self, interval=1):
+    def poll_thread(self, interval=0.25):
         self.interval = interval
         self._stop = threading.Event()
         self._thread = threading.Thread(target=self._run, daemon=True)

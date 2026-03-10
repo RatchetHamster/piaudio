@@ -47,7 +47,7 @@ class App:
 
         while True:
             self.show_screen(self.current_screen)
-            time.sleep(1)
+            time.sleep(0.25)
 
     # ------------------------------------------------
     # APP POLLING

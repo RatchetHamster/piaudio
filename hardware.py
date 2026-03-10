@@ -117,5 +117,5 @@ class HardwareController():
             else:
                 self.screen.state = "on"
         
-    def but_press(self, btn):
+    def but_press(self):
         pass

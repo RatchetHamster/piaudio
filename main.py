@@ -26,9 +26,7 @@ class App:
         # --- Screens ---
         self.screens = {
             "ViewTrack": ViewTrack(self, self),
-            "ViewFolder": ViewFolder(self, self)
-        }
-
+            "ViewFolder": ViewFolder(self, self)}
         self.current_screen = "ViewFolder"
 
         # --- Library ---
@@ -48,7 +46,6 @@ class App:
     def run(self):
 
         while True:
-            #self.poll_timer()
             self.show_screen(self.current_screen)
             time.sleep(1)
 
@@ -72,9 +69,9 @@ class App:
     # ------------------------------------------------
 
     def show_screen(self, name):
-
         self.current_screen = name
         self.screens[name].render()
+        self.hardware.screen.display.display(self.screens[name].frame)
 
     # ------------------------------------------------
     # VIEW HELPERS
@@ -83,17 +80,12 @@ class App:
     def set_to_current_folder_view(self):
 
         screen = self.screens["ViewFolder"]
-
         screen.img_prime_path = self.player.get_indexed_item().path
-
         self.player.increment_index(1)
         screen.img_next_path = self.player.get_indexed_item().path
-
         self.player.increment_index(-2)
         screen.img_prev_path = self.player.get_indexed_item().path
-
         self.player.increment_index(1)
-
         screen.title_text = self.player.get_indexed_item().name
 
     def set_to_current_track_view(self):

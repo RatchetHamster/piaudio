@@ -56,15 +56,12 @@ class App:
     # ------------------------------------------------
 
     def poll_timer(self):
-
         time_to_off = self.hardware.timer.time_until_off
 
-        time_str = "--:--"
-
         if time_to_off is not None:
-            hours = int(time_to_off // 3600)
-            minutes = int((time_to_off % 3600) // 60)
-            time_str = f"{hours:02d}:{minutes:02d}"
+            time_str = time_to_off
+        else:
+            time_str = "--:--"
 
         for screen in self.screens.values():
             screen.time_to_sleep_str = time_str

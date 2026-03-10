@@ -32,7 +32,7 @@ class App:
         self.current_screen = "ViewFolder"
 
         # --- Library ---
-        self.player = Controller(path_str='/home/pi/audiobooks')
+        self.player = Controller(path_str='/home/pi/Music')
 
         self.set_to_current_folder_view()
         self.show_screen("ViewFolder")

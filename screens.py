@@ -202,7 +202,7 @@ class ViewFolder(ViewBase):
 class ViewTrack(ViewBase):
 
     def __init__(self, parent, controller):
-        super().__init__(self, parent, controller)
+        super().__init__(parent, controller)
 
         self.draw_icons("icon-time-onoff", 0, "nw", 50, 3)
         self.draw_icons("icon-rightarrow", 270, "sw", 50, 3)

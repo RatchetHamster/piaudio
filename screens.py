@@ -111,7 +111,7 @@ class ViewFolder(ViewBase):
         self.draw_icons("icon-rightarrow", rotation=0, pos="se", h_pad=50, w_pad=3)
 
         # --- Default Albumn ---
-        img = Image.open(r'/home/pi/resources/default_cover.png')
+        img = Image.open(r'/home/pi/piaudio/resources/default_cover.png')
         self.default_art = img.resize((100, 100))
         self.default_art_sm = img.resize((60, 60))
 

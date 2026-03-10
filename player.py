@@ -15,8 +15,6 @@ class CoreMixer:
         """Initialize mixer and start with max volume."""
         if not mixer.get_init():
             mixer.init()
-        # Optional: ensure system volume at max (Linux)
-        os.system("amixer set Master 100%")
         mixer.music.set_volume(0.4)  # Start at 40% volume
 
     def load(self, path_str):
@@ -82,7 +80,6 @@ class StructuredFolder():
     def get_tracks(self, path: Path):
         track_list = [Track(p, self) for p in sorted(list(path.glob("*.mp3")))]
         return track_list if len(track_list)!=0 else None
-        
 
 
 class Controller(StructuredFolder):
@@ -91,11 +88,7 @@ class Controller(StructuredFolder):
         self.active_obj = self
         self.index_within_obj = 0
         self.playing_track = None
-        self._monitor_thread_started = False
 
-        # --- Start by playing first track --- #
-
-    
     # --- Methods ---
     def enter_into_index(self):
         """ If the index object within active_bj structure is a folder, it will go down a level. 
@@ -109,11 +102,6 @@ class Controller(StructuredFolder):
             else:
                 self.playing_track = self.active_obj.tracks[self.index_within_obj]
                 self.playing_track.play()
-                # Start monitor thread once to auto-advance when a track finishes
-                if not self._monitor_thread_started:
-                    t = threading.Thread(target=self._monitor_playback, daemon=True)
-                    t.start()
-                    self._monitor_thread_started = True
 
     
     def exit_out_of_obj(self):
@@ -133,36 +121,6 @@ class Controller(StructuredFolder):
         else:
             return self.active_obj.tracks[self.index_within_obj]
         
-    def auto_start(self):
-        temp_obj = self.active_obj
-        while True: 
-            if temp_obj.view == "ViewTrack":
-                self.playing_track = temp_obj.tracks[0]
-                self.playing_track.play()
-                break
-            else:
-                temp_obj = temp_obj.subfolders[0]
-    
-    def _monitor_playback(self):
-        """Background thread: watch for track end and auto-advance to next track."""
-        while True:
-            # Wait while music is playing
-            while CoreMixer().is_busy():
-                time.sleep(0.5)
-
-            # At this point the track finished (or was stopped). If playing_track is None, skip.
-            if self.playing_track is None:
-                break
-            
-            i = self.playing_track.parent.tracks.index(self.playing_track) + 1 
-            length = len(self.playing_track.parent.tracks)
-            if i >= length:
-                self.playing_track = None
-                break
-            else:
-                self.playing_track = self.playing_track.parent.tracks[i]
-                self.playing_track.play()
-                break
 
 if __name__ == "__main__":
     CoreMixer().setup()

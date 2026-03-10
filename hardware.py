@@ -1,7 +1,5 @@
 from gpiozero import PWMLED, Button
 from ST7789 import ST7789
-from timer import Timer
-import threading
 
 # Button A is TL
 # Button B is BL
@@ -104,7 +102,6 @@ class HardwareController():
 
         # --- Att ---
         self.screen = Screen()
-        self.timer = Timer(idle_time=0.5)
         self._is_manual_off = False
 
         # --- Init Methods ---
@@ -123,24 +120,5 @@ class HardwareController():
             else:
                 self.screen.state = "on"
         
-    
     def but_press(self, btn):
-        self.timer.nudge()
-    
-    def poll_thread(self, interval=0.25):
-        self.interval = interval
-        self._stop = threading.Event()
-        self._thread = threading.Thread(target=self._run, daemon=True)
-        self._thread.start()        
-
-    def stop(self):
-        self._stop.set()
-
-    def _run(self):
-        while not self._stop.is_set():
-            self._check()
-            self._stop.wait(self.interval)    
-    
-    def _check(self):
-        if not self.is_manual_off:
-            self.screen.state = self.timer.state
+        pass

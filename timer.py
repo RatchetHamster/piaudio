@@ -66,7 +66,7 @@ class Timer:
     
 
     @property
-    def time_to_off(self):
+    def time_until_off(self):
         """Return time until screen turns off (sleep or night) as 'HH:MM'."""
 
         times = []

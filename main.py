@@ -48,7 +48,7 @@ class App:
     def run(self):
 
         while True:
-            self.poll_timer()
+            #self.poll_timer()
             self.show_screen(self.current_screen)
             time.sleep(1)
 

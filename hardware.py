@@ -104,9 +104,6 @@ class HardwareController():
         self.screen = Screen()
         self._is_manual_off = False
 
-        # --- Init Methods ---
-        self.poll_thread(interval=1) # (sec)
-
     @property
     def is_manual_off(self):
         return self._is_manual_off

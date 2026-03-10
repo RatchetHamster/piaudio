@@ -53,29 +53,35 @@ class Screen():
 
 
 class Board_Button():
-    def __init__(self, pin, label, press_fun_name=None, held_fun_name=None, release_fun_name=None, hold_time=1, hold_repeat=True):
+    def __init__(self, pin, label, press_fun_name=None, held_fun_name=None, release_fun_name=None, hold_time=0.7, hold_repeat=True):
         self.label = label
         self.press_fun_name = press_fun_name
         self.held_fun_name = held_fun_name
         self.release_fun_name = release_fun_name
-        self.button = Button(pin, pull_up = True, hold_time=hold_time, hold_repeat=hold_repeat)
-        self.button.when_pressed = self.pressed()
-        self.button.when_held = self.held()
-        self.button.when_released = self.released()
+
+        self.button = Button(pin, pull_up=True, hold_time=hold_time, hold_repeat=hold_repeat)
+
+        self.button.when_pressed = self.pressed
+        self.button.when_held = self.held
+        self.button.when_released = self.released
+
         self.was_held = False
-    
+
     def pressed(self):
-        self.was_held=False
-        self.press_fun_name()
-    
+        self.was_held = False
+        if self.press_fun_name:
+            self.press_fun_name()
+
     def held(self):
         self.was_held = True
-        self.held_fun_name()
-    
+        if self.held_fun_name:
+            self.held_fun_name()
+
     def released(self):
         if not self.was_held:
-            self.release_fun_name()
-        self.was_held=False
+            if self.release_fun_name:
+                self.release_fun_name()
+        self.was_held = False
 
 
 class HardwareController():

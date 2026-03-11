@@ -9,12 +9,15 @@ other tracks in that folder will be discounted. Tracks need to have no folders i
 folder they rest in. All artwork at each level should be a jpg. 
     e.g. Artist folder > album subfolders (with artist jpg) > tracks (with album jpg)"""
 
+# Select HiFiBerry DAC before importing mixer
+os.environ['SDL_AUDIODRIVER'] = 'alsa'
+os.environ['SDL_ALSA_DEV'] = 'plughw:1,0'
 
 class CoreMixer:
     def setup(self):
         """Initialize mixer and start with max volume."""
         if not mixer.get_init():
-            mixer.init(devicename='hw:1,0')
+            mixer.init()
         mixer.music.set_volume(1.0)  # Start at 100% volume
 
     def load(self, path_str):

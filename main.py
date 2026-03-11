@@ -15,12 +15,12 @@ class App:
         self.vol_notch = 0.05
 
         # --- Timer ---
-        self.sleep_times = [1*60, 12/60, 3*60, 4*60, 5*60]
+        self.sleep_times = [1*60, 2*60, 3*60, 4*60, 5*60]
         self.sleep_index = 1
         self.timer = Timer(
             idle_time=10/60,                                       # minutes until idle
             sleep_time=self.sleep_times[self.sleep_index],     # Default sleep time
-            night_start=(22, 0),
+            night_start=(16, 32),
             night_end=(6, 0))
 
         # --- Hardware ---

@@ -64,7 +64,7 @@ class App:
             self.hardware.screen.state = self.timer.state
 
             # Drive refresh rate
-            time.sleep(0.25)
+            time.sleep(0.1)
 
     # ------------------------------------------------
     # SCREEN MANAGEMENT
@@ -177,7 +177,7 @@ class App:
     # --- ViewFolder Long Press ---
 
     def vf_A_long(self):
-        self.hardware.is_manual_off = not self.hardware.is_manual_off
+        self.timer.is_manual_off = not self.timer.is_manual_off
 
     def vf_B_long(self):
         CoreMixer().inc_vol(-self.vol_notch)

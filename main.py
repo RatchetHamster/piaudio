@@ -14,6 +14,15 @@ class App:
         # --- Presets ---
         self.vol_notch = 0.05
 
+        # --- Timer ---
+        self.sleep_times = [1*60, 2*60, 3*60, 4*60, 5*60]
+        self.sleep_index = 1
+        self.timer = Timer(
+            idle_time=1,                                       # minutes until idle
+            sleep_time=self.sleep_times[self.sleep_index],     # Default sleep time
+            night_start=(22, 0),
+            night_end=(6, 0))
+
         # --- Hardware ---
         self.hardware = HardwareController(
             Ashort_fun=self.A_short,
@@ -37,14 +46,6 @@ class App:
         self.set_to_current_folder_view()
         self.show_screen("ViewFolder")
 
-        # --- Timer ---
-        self.sleep_times = [1*60, 2*60, 3*60, 4*60, 5*60]
-        self.sleep_index = 1
-        self.timer = Timer(
-            idle_time=1,                                       # minutes until idle
-            sleep_time=self.sleep_times[self.sleep_index],     # Default sleep time
-            night_start=(22, 0),
-            night_end=(6, 0))
 
     # ------------------------------------------------
     # MAIN LOOP

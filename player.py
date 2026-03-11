@@ -18,7 +18,7 @@ class CoreMixer:
         """Initialize mixer and start with max volume."""
         if not mixer.get_init():
             mixer.init()
-        mixer.music.set_volume(1.0)  # Start at 100% volume
+        mixer.music.set_volume(0.75)  # Start at 75% volume
 
     def load(self, path_str):
         mixer.music.load(path_str)
@@ -127,6 +127,17 @@ class Controller(StructuredFolder):
             return self.active_obj.subfolders[self.index_within_obj]
         else:
             return self.active_obj.tracks[self.index_within_obj]
+    
+    def check_and_autonext(self):
+        """If the current track has finished playing, it will move to the next one and play it."""
+        if self.active_obj.view == "ViewTrack" and self.playing_track is not None:
+            if not CoreMixer().is_busy():
+                self.increment_index(1)
+                if self.index_within_obj == 0:
+                    self.playing_track = None
+                else:
+                    self.playing_track = self.active_obj.tracks[self.index_within_obj]
+                    self.playing_track.play()
         
 
 if __name__ == "__main__":

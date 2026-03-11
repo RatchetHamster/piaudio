@@ -1,8 +1,8 @@
+from timer import Timer
 import time
 from player import Controller, CoreMixer
 from screens import ViewTrack, ViewFolder
 from hardware import HardwareController
-import os
 
 
 class App:
@@ -34,9 +34,17 @@ class App:
 
         # --- Library ---
         self.player = Controller(path_str='/home/pi/Music')
-
         self.set_to_current_folder_view()
         self.show_screen("ViewFolder")
+
+        # --- Timer ---
+        self.sleep_times = [1*60, 2*60, 3*60, 4*60, 5*60]
+        self.sleep_index = 1
+        self.timer = Timer(
+            idle_time=1,                                       # minutes until idle
+            sleep_time=self.sleep_times[self.sleep_index],     # Default sleep time
+            night_start=(22, 0),
+            night_end=(6, 0))
 
     # ------------------------------------------------
     # MAIN LOOP
@@ -45,23 +53,17 @@ class App:
     def run(self):
 
         while True:
+            # Auto next
+            self.player.check_and_autonext() 
+
+            # Screen Refresh
             self.show_screen(self.current_screen)
+
+            # Timer set to screen state
+            self.hardware.screen.state = self.timer.state
+
+            # Drive refresh rate
             time.sleep(0.25)
-
-    # ------------------------------------------------
-    # APP POLLING
-    # ------------------------------------------------
-
-    def poll_timer(self):
-        time_to_off = self.hardware.timer.time_until_off
-
-        if time_to_off is not None:
-            time_str = time_to_off
-        else:
-            time_str = "--:--"
-
-        for screen in self.screens.values():
-            screen.time_to_sleep_str = time_str
 
     # ------------------------------------------------
     # SCREEN MANAGEMENT
@@ -222,6 +224,5 @@ class App:
 
 
 if __name__ == "__main__":
-    os.system("amixer set PCM 100%")
     app = App()
     app.run()

@@ -24,7 +24,6 @@ class ViewBase:
         self.font_bold = ImageFont.truetype(r'/home/pi/piaudio/resources/Inter-Bold.otf', 16)
         self.font_sm_bold = ImageFont.truetype(r'/home/pi/piaudio/resources/Inter-Bold.otf', 12)
 
-        self.time_to_sleep_str = "--:--"
         self.frame = self.image.copy()
 
     # ---------- drawing ----------
@@ -92,6 +91,16 @@ class ViewFolder(ViewBase):
             fill="black",
             anchor="rt",
             font=self.font)
+        
+        time_to_off = self.controller.timer.time_until_off
+        time_str = time_to_off if time_to_off is not None else "--:--"
+        
+        draw.text(
+            (WIDTH // 2, 5),
+            time_str,
+            fill="black",
+            anchor="mt",   # middle-top anchor
+            font=self.font)
 
         # images
         prev = self._load_image(self.img_prev_path, (60, 60)) or self.default_art_sm
@@ -146,9 +155,9 @@ class ViewTrack(ViewBase):
         super().__init__(parent, controller)
 
         self.draw_icons("icon-time-onoff", 0, "nw", 50, 3)
-        self.draw_icons("icon-rightarrow", 270, "sw", 50, 3)
+        self.draw_icons("icon-rightarrow", 90, "sw", 50, 3)
         self.draw_icons("icon-list", 0, "ne", 50, 3)
-        self.draw_icons("icon-rightarrow", 90, "se", 50, 3)
+        self.draw_icons("icon-rightarrow", 270, "se", 50, 3)
 
         self.title_list = []
         self.bold_index = None

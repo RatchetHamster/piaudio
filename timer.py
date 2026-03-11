@@ -9,8 +9,8 @@ class Timer:
         idle_time=5,        # minutes until idle
         sleep_time=120,     # minutes until off
         night_start=(22, 0),
-        night_end=(6, 0)
-    ):
+        night_end=(6, 0)):
+        
         self.idle_time = idle_time
         self.sleep_time = sleep_time
         self.night_start = night_start

@@ -184,7 +184,7 @@ class ViewTrack(ViewBase):
 
             if i == self.bold_index:
                 draw.rectangle((30, y - 2, 210, y + 20), fill=(180, 200, 200))
-            if self.controller.playing_track is not None and self.title_list[i] == self.controller.player.playing_track.name:
+            if self.controller.player.playing_track is not None and self.title_list[i] == self.controller.player.playing_track.name:
                 draw.text(
                     (35, y),
                     self.title_list[i],

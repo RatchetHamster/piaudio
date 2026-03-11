@@ -184,9 +184,15 @@ class ViewTrack(ViewBase):
 
             if i == self.bold_index:
                 draw.rectangle((30, y - 2, 210, y + 20), fill=(180, 200, 200))
-
-            draw.text(
-                (35, y),
-                self.title_list[i],
-                fill="black",
-                font=self.font)
+            if self.title_list[i] == self.parent.player.playing_track.name:
+                draw.text(
+                    (35, y),
+                    self.title_list[i],
+                    fill="black",
+                    font=self.font_bold)
+            else:
+                draw.text(
+                    (35, y),
+                    self.title_list[i],
+                    fill="black",
+                    font=self.font)

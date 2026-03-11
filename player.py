@@ -130,14 +130,13 @@ class Controller(StructuredFolder):
     
     def check_and_autonext(self):
         """If the current track has finished playing, it will move to the next one and play it."""
-        if self.active_obj.view == "ViewTrack" and self.playing_track is not None:
-            if not CoreMixer().is_busy():
-                self.increment_index(1)
-                if self.index_within_obj == 0:
-                    self.playing_track = None
-                else:
-                    self.playing_track = self.active_obj.tracks[self.index_within_obj]
-                    self.playing_track.play()
+        if self.playing_track is not None and not CoreMixer().is_busy():
+            i = self.playing_track.parent.tracks.index(self.playing_track) + 1 % len(self.playing_track.parent.tracks)
+            if i == 0:
+                self.playing_track = None
+            else:
+                self.playing_track = self.playing_track.parent.tracks[i]
+                self.playing_track.play()
         
 
 if __name__ == "__main__":

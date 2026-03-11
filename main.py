@@ -124,7 +124,7 @@ class App:
         screen.bold_index = bold_index
 
     def button_choice(self, vf_fun, vt_fun):
-
+        self.timer.nudge_idle()
         if self.player.active_obj.view == "ViewFolder":
             vf_fun()
         else:

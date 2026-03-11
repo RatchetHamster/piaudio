@@ -15,11 +15,11 @@ class App:
         self.vol_notch = 0.05
 
         # --- Timer ---
-        self.sleep_times = [1*60, 2*60, 3*60, 4*60, 5*60]
+        self.sleep_times = [1*60, 12/60, 3*60, 4*60, 5*60]
         self.sleep_index = 1
         self.timer = Timer(
             idle_time=10/60,                                       # minutes until idle
-            sleep_time=12/60,#sleep_time=self.sleep_times[self.sleep_index],     # Default sleep time
+            sleep_time=self.sleep_times[self.sleep_index],     # Default sleep time
             night_start=(22, 0),
             night_end=(6, 0))
 
@@ -137,7 +137,9 @@ class App:
     # --- ViewFolder Short Press ---
 
     def vf_A_short(self):
-        pass
+        self.timer.nudge()
+        self.sleep_index = (self.sleep_index + 1) % len(self.sleep_times)
+        self.timer.sleep_time = self.sleep_times[self.sleep_index]
 
     def vf_B_short(self):
         self.player.increment_index(-1)
@@ -161,7 +163,7 @@ class App:
     # --- ViewTrack Short Press ---
 
     def vt_A_short(self):
-        pass
+        self.vf_A_short()
 
     def vt_B_short(self):
         self.player.increment_index(-1)

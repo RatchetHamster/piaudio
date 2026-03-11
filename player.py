@@ -74,8 +74,12 @@ class StructuredFolder():
         return jpgs[0] if len(jpgs)!=0 else None
     
     def get_subfolders(self, path: Path):
-        folder_list = [StructuredFolder(p, self) for p in path.iterdir() if p.is_dir()]
-        return folder_list if len(folder_list)!=0 else None
+        folders = sorted(
+            [p for p in path.iterdir() if p.is_dir()],
+            key=lambda p: p.name.lower()
+        )
+        folder_list = [StructuredFolder(p, self) for p in folders]
+        return folder_list if len(folder_list) != 0 else None
 
     def get_tracks(self, path: Path):
         track_list = [Track(p, self) for p in sorted(list(path.glob("*.mp3")))]

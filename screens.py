@@ -20,8 +20,8 @@ class ViewBase:
 
         self.font = ImageFont.truetype(r'/home/pi/piaudio/resources/Inter-Regular.otf', 24)
         self.font_sm = ImageFont.truetype(r'/home/pi/piaudio/resources/Inter-Regular.otf', 18)
-        self.font_bold = ImageFont.truetype(r'/home/pi/piaudio/resources/Inter-bold.otf', 24)
-        self.font_sm_bold = ImageFont.truetype(r'/home/pi/piaudio/resources/Inter-bold.otf', 18)
+        self.font_bold = ImageFont.truetype(r'/home/pi/piaudio/resources/Inter-Bold.otf', 24)
+        self.font_sm_bold = ImageFont.truetype(r'/home/pi/piaudio/resources/Inter-Bold.otf', 18)
 
         self.vol_str = '-- %'
         self.time_to_sleep_str = "--:--"

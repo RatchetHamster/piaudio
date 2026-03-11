@@ -10,11 +10,13 @@ class Timer:
         sleep_time=120,     # minutes until off
         night_start=(22, 0),
         night_end=(6, 0)):
-        
+
         self.idle_time = idle_time
         self.sleep_time = sleep_time
         self.night_start = night_start
         self.night_end = night_end
+
+        self.is_manual_off = False
 
         now = datetime.now()
         self.last_idle = now
@@ -58,7 +60,7 @@ class Timer:
 
     @property
     def state(self):
-        if self.is_night() or self.is_sleep():
+        if self.is_manual_off or self.is_night() or self.is_sleep():
             return "off"
         if self.is_idle():
             return "idle"

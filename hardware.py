@@ -102,20 +102,6 @@ class HardwareController():
 
         # --- Att ---
         self.screen = Screen()
-        self._is_manual_off = False
-
-    @property
-    def is_manual_off(self):
-        return self._is_manual_off
-    
-    @is_manual_off.setter
-    def is_manual_off(self, value):
-        if value != self._is_manual_off:
-            self._is_manual_off = value
-            if value: 
-                self.screen.state = "off"
-            else:
-                self.screen.state = "on"
         
     def but_press(self):
         pass

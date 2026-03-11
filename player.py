@@ -14,8 +14,8 @@ class CoreMixer:
     def setup(self):
         """Initialize mixer and start with max volume."""
         if not mixer.get_init():
-            mixer.init()
-        mixer.music.set_volume(0.4)  # Start at 40% volume
+            mixer.init(devicename='hw:1,0')
+        mixer.music.set_volume(1.0)  # Start at 100% volume
 
     def load(self, path_str):
         mixer.music.load(path_str)

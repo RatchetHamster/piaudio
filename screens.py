@@ -86,7 +86,6 @@ class ViewFolder(ViewBase):
 
         # Header
         vol = CoreMixer().get_vol()
-
         draw.text(
             (WIDTH - 5, 5),
             f"{vol*100:.0f}%",
@@ -159,6 +158,15 @@ class ViewTrack(ViewBase):
 
         self.frame = self.image.copy()
         draw = ImageDraw.Draw(self.frame)
+
+        # Header
+        vol = CoreMixer().get_vol()
+        draw.text(
+            (WIDTH - 5, 5),
+            f"{vol*100:.0f}%",
+            fill="black",
+            anchor="rt",
+            font=self.font)
 
         for i in range(8):
             if i >= len(self.title_list):

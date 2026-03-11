@@ -136,12 +136,10 @@ class App:
         pass
 
     def vf_B_short(self):
-
         self.player.increment_index(-1)
         self.set_to_current_folder_view()
 
     def vf_X_short(self):
-
         self.player.enter_into_index()
         self.player.index_within_obj = 0
 
@@ -153,7 +151,6 @@ class App:
             self.show_screen("ViewFolder")
 
     def vf_Y_short(self):
-
         self.player.increment_index(1)
         self.set_to_current_folder_view()
 
@@ -163,19 +160,13 @@ class App:
         pass
 
     def vt_B_short(self):
-
         self.player.increment_index(-1)
         self.set_to_current_track_view()
 
     def vt_X_short(self):
-
-        if CoreMixer().is_busy():
-            self.player.playing_track.stop()
-        else:
-            self.player.playing_track.play()
+        self.player.enter_into_index()
 
     def vt_Y_short(self):
-
         self.player.increment_index(1)
         self.set_to_current_track_view()
 
@@ -199,44 +190,32 @@ class App:
         CoreMixer().inc_vol(self.vol_notch)
 
     # --- ViewTrack Long Press ---
-
     def vt_A_long(self):
-        self.hardware.is_manual_off = not self.hardware.is_manual_off
-
+        self.vf_A_long()
     def vt_B_long(self):
         self.vf_B_long()
-
     def vt_X_long(self):
         self.vf_X_long()
-
     def vt_Y_long(self):
         self.vf_Y_long()
 
     # ------------------------------------------------
     # GLOBAL BUTTON CALLBACKS
     # ------------------------------------------------
-
     def A_short(self):
         self.button_choice(self.vf_A_short, self.vt_A_short)
-
     def B_short(self):
         self.button_choice(self.vf_B_short, self.vt_B_short)
-
     def X_short(self):
         self.button_choice(self.vf_X_short, self.vt_X_short)
-
     def Y_short(self):
         self.button_choice(self.vf_Y_short, self.vt_Y_short)
-
     def A_long(self):
         self.button_choice(self.vf_A_long, self.vt_A_long)
-
     def B_long(self):
         self.button_choice(self.vf_B_long, self.vt_B_long)
-
     def X_long(self):
         self.button_choice(self.vf_X_long, self.vt_X_long)
-
     def Y_long(self):
         self.button_choice(self.vf_Y_long, self.vt_Y_long)
 

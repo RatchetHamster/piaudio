@@ -112,12 +112,29 @@ class ViewFolder(ViewBase):
         self.frame.paste(nxt, (WIDTH - 65, 90))
 
         if self.title_text:
-            draw.text(
+            text = self.title_text
+
+            # Wrap text at 20 characters
+            lines = []
+            while len(text) > 20:
+                split_pos = text.rfind(" ", 0, 20)
+                if split_pos == -1:
+                    split_pos = 20
+                lines.append(text[:split_pos])
+                text = text[split_pos:].strip()
+
+            lines.append(text)
+
+            wrapped_text = "\n".join(lines)
+
+            draw.multiline_text(
                 (WIDTH // 2, HEIGHT - 60),
-                self.title_text,
+                wrapped_text,
                 fill="black",
                 anchor="ma",
-                font=self.font)
+                font=self.font,
+                align="center"
+            )
 
 
     def _load_image(self, path, size):

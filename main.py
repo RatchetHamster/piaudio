@@ -2,6 +2,7 @@ import time
 from player import Controller, CoreMixer
 from screens import ViewTrack, ViewFolder
 from hardware import HardwareController
+import os
 
 
 class App:
@@ -221,6 +222,6 @@ class App:
 
 
 if __name__ == "__main__":
-
+    os.system("amixer set PCM 100%")
     app = App()
     app.run()

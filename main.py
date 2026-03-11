@@ -19,7 +19,7 @@ class App:
         self.sleep_index = 1
         self.timer = Timer(
             idle_time=10/60,                                       # minutes until idle
-            sleep_time=self.sleep_times[self.sleep_index],     # Default sleep time
+            sleep_time=12/60,#sleep_time=self.sleep_times[self.sleep_index],     # Default sleep time
             night_start=(22, 0),
             night_end=(6, 0))
 

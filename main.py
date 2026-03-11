@@ -7,7 +7,9 @@ from hardware import HardwareController
 class App:
 
     def __init__(self):
-
+        
+        CoreMixer().setup() 
+        
         # --- Presets ---
         self.vol_notch = 0.05
 
@@ -34,10 +36,6 @@ class App:
 
         self.set_to_current_folder_view()
         self.show_screen("ViewFolder")
-
-        # --- Header ---
-        CoreMixer().setup()
-        self.set_vol_str()
 
     # ------------------------------------------------
     # MAIN LOOP
@@ -120,13 +118,6 @@ class App:
 
         screen.title_list = title_list
         screen.bold_index = bold_index
-
-    def set_vol_str(self):
-
-        vol = CoreMixer().get_vol()
-
-        for screen in self.screens.values():
-            screen.vol_str = f"{vol*100:.0f}%"
 
     def button_choice(self, vf_fun, vt_fun):
 

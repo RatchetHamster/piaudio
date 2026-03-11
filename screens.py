@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 from pathlib import Path
 import os
+from player import CoreMixer
 
 WIDTH = 240
 HEIGHT = 240
@@ -23,7 +24,6 @@ class ViewBase:
         self.font_bold = ImageFont.truetype(r'/home/pi/piaudio/resources/Inter-Bold.otf', 16)
         self.font_sm_bold = ImageFont.truetype(r'/home/pi/piaudio/resources/Inter-Bold.otf', 12)
 
-        self.vol_str = '-- %'
         self.time_to_sleep_str = "--:--"
         self.frame = self.image.copy()
 
@@ -56,24 +56,6 @@ class ViewBase:
 
         self.image.paste(img, (x, y), img)
 
-    def draw_header(self):
-
-        self.draw.text(
-            (WIDTH - 5, 3),
-            self.vol_str,
-            fill="black",
-            anchor="ra",
-            font=self.font
-        )
-
-        self.draw.text(
-            (WIDTH // 2, 3),
-            self.time_to_sleep_str,
-            fill="black",
-            anchor="ma",
-            font=self.font
-        )
-
 
 class ViewFolder(ViewBase):
     def __init__(self, parent, controller):
@@ -101,6 +83,16 @@ class ViewFolder(ViewBase):
 
         self.frame = self.image.copy()
         draw = ImageDraw.Draw(self.frame)
+
+        # Header
+        vol = CoreMixer().get_vol()
+
+        draw.text(
+            (WIDTH - 5, 5),
+            f"{vol*100:.0f}%",
+            fill="black",
+            anchor="rt",
+            font=self.font_sm)
 
         # images
         prev = self._load_image(self.img_prev_path, (60, 60)) or self.default_art_sm

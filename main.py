@@ -60,11 +60,17 @@ class App:
             # Screen Refresh
             self.show_screen(self.current_screen)
 
-            # Timer set to screen state
-            self.hardware.screen.state = self.timer.state
+            # Poll timer/hardware
+            self.poll()
 
             # Drive refresh rate
             time.sleep(0.1)
+
+    def poll(self):
+        self.hardware.screen.state = self.timer.state
+        if self.hardware.screen.state == "off" and self.player.playing_track is not None:
+            self.player.playing_track.stop()
+            self.player.playing_track = None
 
     # ------------------------------------------------
     # SCREEN MANAGEMENT

@@ -185,9 +185,7 @@ class App:
         self.hardware.is_manual_off = not self.hardware.is_manual_off
 
     def vf_B_long(self):
-
         CoreMixer().inc_vol(-self.vol_notch)
-        self.set_vol_str()
 
     def vf_X_long(self):
 
@@ -198,9 +196,7 @@ class App:
         self.show_screen("ViewFolder")
 
     def vf_Y_long(self):
-
         CoreMixer().inc_vol(self.vol_notch)
-        self.set_vol_str()
 
     # --- ViewTrack Long Press ---
 

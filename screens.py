@@ -92,7 +92,7 @@ class ViewFolder(ViewBase):
             f"{vol*100:.0f}%",
             fill="black",
             anchor="rt",
-            font=self.font_sm)
+            font=self.font)
 
         # images
         prev = self._load_image(self.img_prev_path, (60, 60)) or self.default_art_sm

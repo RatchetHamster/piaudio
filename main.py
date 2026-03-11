@@ -177,7 +177,11 @@ class App:
     # --- ViewFolder Long Press ---
 
     def vf_A_long(self):
-        self.timer.is_manual_off = not self.timer.is_manual_off
+        if self.timer.state == "off":
+            self.timer.is_manual_off = False
+            self.timer.nudge()
+        else:
+            self.timer.is_manual_off = not self.timer.is_manual_off
 
     def vf_B_long(self):
         CoreMixer().inc_vol(-self.vol_notch)

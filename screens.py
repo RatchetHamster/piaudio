@@ -18,10 +18,10 @@ class ViewBase:
         self.draw_icons("icon-backdrop", rotation=180, pos="ne")
         self.draw_icons("icon-backdrop", rotation=180, pos="se")
 
-        self.font = ImageFont.truetype(r'resources/Inter-Regular.otf', 24)
-        self.font_sm = ImageFont.truetype(r'resources/Inter-Regular.otf', 18)
-        self.font_bold = ImageFont.truetype(r'resources/Inter-bold.otf', 24)
-        self.font_sm_bold = ImageFont.truetype(r'resources/Inter-bold.otf', 18)
+        self.font = ImageFont.truetype(r'/home/pi/piaudio/resources/Inter-Regular.otf', 24)
+        self.font_sm = ImageFont.truetype(r'/home/pi/piaudio/resources/Inter-Regular.otf', 18)
+        self.font_bold = ImageFont.truetype(r'/home/pi/piaudio/resources/Inter-bold.otf', 24)
+        self.font_sm_bold = ImageFont.truetype(r'/home/pi/piaudio/resources/Inter-bold.otf', 18)
 
         self.vol_str = '-- %'
         self.time_to_sleep_str = "--:--"

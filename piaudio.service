@@ -1,6 +1,6 @@
 [Unit]
 Description=PiAudio Service
-After=graphical.target sound.target
+After=sound.target
 Wants=sound.target
 
 [Service]
@@ -22,4 +22,4 @@ StandardOutput=journal
 StandardError=journal
 
 [Install]
-WantedBy=graphical.target
+WantedBy=multi-user.target

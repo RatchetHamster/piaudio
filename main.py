@@ -68,7 +68,7 @@ class App:
 
     def poll(self):
         self.hardware.screen.state = self.timer.state
-        if self.hardware.screen.state == "off" and self.player.playing_track is not None:
+        if self.player.playing_track is not None and self.hardware.screen.state == "off":
             self.player.playing_track.stop()
             self.player.playing_track = None
 

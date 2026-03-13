@@ -1,6 +1,4 @@
 import os
-import threading
-import time
 from pygame import mixer
 from pathlib import Path
 
